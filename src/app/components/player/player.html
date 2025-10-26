@@ -54,33 +54,34 @@
     </div>
 
     <div class="controls">
+      <div class="main-controls">
+        <button class="control-button">
+          <svg class="control-icon-large" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18 6l-8.5 6 8.5 6V6zM6 6v12h2V6H6z"/>
+          </svg>
+        </button>
 
-      <button class="control-button">
-        <svg class="control-icon-large" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M18 6l-8.5 6 8.5 6V6zM6 6v12h2V6H6z"/>
-        </svg>
-      </button>
+        <button 
+          (click)="togglePlay()"
+          class="play-button"
+          [style.background-color]="getAccentColor()"
+        >
+          <svg *ngIf="!isPlaying" class="play-icon" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <svg *ngIf="isPlaying" class="play-icon" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+          </svg>
+        </button>
 
-      <button 
-        (click)="togglePlay()"
-        class="play-button"
-        [style.background-color]="getAccentColor()"
-      >
-        <svg *ngIf="!isPlaying" class="play-icon" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M8 5v14l11-7z"/>
-        </svg>
-        <svg *ngIf="isPlaying" class="play-icon" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
-        </svg>
-      </button>
+        <button class="control-button">
+          <svg class="control-icon-large" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+          </svg>
+        </button>
+      </div>
 
-      <button class="control-button">
-        <svg class="control-icon-large" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
-        </svg>
-      </button>
-
-      <button class="control-button">
+      <button class="control-button repeat-button">
         <svg class="control-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />

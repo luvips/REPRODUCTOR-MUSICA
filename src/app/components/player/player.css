@@ -126,7 +126,13 @@
 .controls {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.main-controls {
+  display: flex;
+  align-items: center;
   gap: 24px;
 }
 
@@ -193,4 +199,8 @@
 
 .player-content {
   animation: fadeIn 0.4s ease;
+}
+
+.repeat-button {
+  margin-left: auto;
 }
