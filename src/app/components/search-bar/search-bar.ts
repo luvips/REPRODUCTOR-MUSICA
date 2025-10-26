@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
-  imports: [],
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './search-bar.html',
-  styleUrl: './search-bar.css',
+  styleUrls: ['./search-bar.css']
 })
-export class SearchBar {
+export class SearchBarComponent {
+  @Output() search = new EventEmitter<string>();
+  searchQuery: string = '';
 
+  onSearch(): void {
+    if (this.searchQuery.trim()) {
+      this.search.emit(this.searchQuery);
+    }
+  }
+
+  onKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.onSearch();
+    }
+  }
 }
