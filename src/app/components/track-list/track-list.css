@@ -1,7 +1,4 @@
 .track-list-container {
-  background-color: #18181b;
-  border-radius: 12px;
-  padding: 20px;
   height: 100%;
   overflow-y: auto;
 }
