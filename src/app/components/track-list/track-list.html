@@ -1,1 +1,25 @@
-<p>track-list works!</p>
+<div class="track-list-container">
+  <h2 class="track-list-title">Recent Played</h2>
+  
+  <div *ngIf="tracks.length === 0" class="empty-state">
+    Search for songs to see results here
+  </div>
+
+  <div class="tracks">
+    <div 
+      *ngFor="let track of tracks" 
+      (click)="selectTrack(track)"
+      class="track-item"
+    >
+      <img 
+        [src]="track.albumArt" 
+        [alt]="track.album"
+        class="track-image"
+      />
+      <div class="track-info">
+        <p class="track-name">{{ track.name }}</p>
+        <p class="track-artist">{{ track.artist }}</p>
+      </div>
+    </div>
+  </div>
+</div>
