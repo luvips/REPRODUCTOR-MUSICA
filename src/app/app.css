@@ -38,14 +38,14 @@
 .player-section {
   flex: 1;
   background: linear-gradient(to bottom, #18181b, black);
-  overflow-y: auto;
 }
 
 .tracklist-section {
   width: 384px;
   background-color: #0a0a0a;
   border-left: 1px solid #27272a;
-  overflow: hidden;
+  overflow-y: auto;
+  height: calc(100vh - 97px);
 }
 
 ::-webkit-scrollbar {
