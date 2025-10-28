@@ -16,18 +16,15 @@ export class SpotifyService {
   private token$ = this.tokenSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    // Si ya tienes un token manual, úsalo
     if (environment.TOKEN) {
       this.tokenSubject.next(environment.TOKEN);
     } else {
-      // Si no, obtén uno automáticamente
+      // Si no, se genera uno automáticamente
       this.refreshToken();
     }
   }
 
-  /**
-   * Obtener token automáticamente usando Client Credentials
-   */
+
   private refreshToken(): void {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -39,20 +36,20 @@ export class SpotifyService {
     this.http.post<any>(this.authUrl, body, { headers })
       .subscribe({
         next: (response) => {
-          console.log('✅ Token obtenido exitosamente');
+          console.log('Token obtenido exitosamente');
           this.tokenSubject.next(response.access_token);
           
           // Renovar token automáticamente antes de que expire (50 minutos)
           setTimeout(() => this.refreshToken(), 50 * 60 * 1000);
         },
         error: (error) => {
-          console.error('❌ Error obteniendo token:', error);
+          console.error('Error obteniendo token:', error);
         }
       });
   }
 
   /**
-   * Búsqueda de canciones en Spotify
+   * Búsqueda de canciones
    */
   searchTracks(query: string): Observable<any[]> {
     return this.token$.pipe(

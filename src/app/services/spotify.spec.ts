@@ -13,7 +13,7 @@ describe('SpotifyService', () => {
     service = TestBed.inject(SpotifyService);
   });
 
-  it('should be created', () => {
+  it('creará el servicio', () => {
     expect(service).toBeTruthy();
   });
 });
