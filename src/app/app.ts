@@ -31,8 +31,8 @@ export class AppComponent {
       id: '1',
       name: 'SPAGHETTI',
       artist: 'LE SSERAFIM',
-      album: 'CRAZY',
-      albumArt: 'https://i.scdn.co/image/ab67616d0000b273f4f26bf61146be19d49b6cce',
+      album: 'SPA',
+      albumArt: 'https://i.scdn.co/image/ab67616d00001e026c4a726c271daf4a4b97e35b',
       duration: 193000,
       previewUrl: null
     },
@@ -41,7 +41,7 @@ export class AppComponent {
       name: 'CRAZY',
       artist: 'LE SSERAFIM',
       album: 'CRAZY',
-      albumArt: 'https://i.scdn.co/image/ab67616d0000b273f4f26bf61146be19d49b6cce',
+      albumArt: 'https://upload.wikimedia.org/wikipedia/en/3/35/Crazy_%28Le_Sserafim_album%29.png',
       duration: 153000,
       previewUrl: null
     },
@@ -50,7 +50,7 @@ export class AppComponent {
       name: 'Pierrot',
       artist: 'LE SSERAFIM',
       album: 'CRAZY',
-      albumArt: 'https://i.scdn.co/image/ab67616d0000b273f4f26bf61146be19d49b6cce',
+      albumArt: 'https://upload.wikimedia.org/wikipedia/en/3/35/Crazy_%28Le_Sserafim_album%29.png',
       duration: 169000,
       previewUrl: null
     },
@@ -59,7 +59,7 @@ export class AppComponent {
       name: 'Chasing Lightning',
       artist: 'LE SSERAFIM',
       album: 'CRAZY',
-      albumArt: 'https://i.scdn.co/image/ab67616d0000b273f4f26bf61146be19d49b6cce',
+      albumArt: 'https://upload.wikimedia.org/wikipedia/en/3/35/Crazy_%28Le_Sserafim_album%29.png',
       duration: 193000,
       previewUrl: null
     },
@@ -68,7 +68,7 @@ export class AppComponent {
       name: 'UNFORGIVEN (feat. Nile Rodgers)',
       artist: 'LE SSERAFIM',
       album: 'UNFORGIVEN',
-      albumArt: 'https://i.scdn.co/image/ab67616d0000b273a991995542d50a691b9ae5be',
+      albumArt: 'https://i.scdn.co/image/ab67616d00001e02a991995542d50a691b9ae5be',
       duration: 181000,
       previewUrl: null
     },
@@ -77,7 +77,7 @@ export class AppComponent {
       name: 'Eve, Psyche & The Bluebeard\'s wife',
       artist: 'LE SSERAFIM',
       album: 'UNFORGIVEN',
-      albumArt: 'https://i.scdn.co/image/ab67616d0000b273a991995542d50a691b9ae5be',
+      albumArt: 'https://i.scdn.co/image/ab67616d00001e02a991995542d50a691b9ae5be',
       duration: 191000,
       previewUrl: null
     },
@@ -86,7 +86,7 @@ export class AppComponent {
       name: 'ANTIFRAGILE',
       artist: 'LE SSERAFIM',
       album: 'ANTIFRAGILE',
-      albumArt: 'https://i.scdn.co/image/ab67616d0000b273a991995542d50a691b9ae5be',
+      albumArt: 'https://i.scdn.co/image/ab67616d00001e02a991995542d50a691b9ae5be',
       duration: 192000,
       previewUrl: null
     },
@@ -95,7 +95,7 @@ export class AppComponent {
       name: 'Perfect Night',
       artist: 'LE SSERAFIM',
       album: 'Perfect Night',
-      albumArt: 'https://i.scdn.co/image/ab67616d0000b2737e1eeb0d7cc374a168369c80',
+      albumArt: 'https://i.scdn.co/image/ab67616d00001e027e1eeb0d7cc374a168369c80',
       duration: 188000,
       previewUrl: null
     }
@@ -107,7 +107,7 @@ export class AppComponent {
   error: string | null = null;
 
   constructor(private spotifyService: SpotifyService) {
-    // Pre-cargar SPAGHETTI como canción inicial
+   
     this.selectedTrack = this.staticPlaylist[0];
   }
 

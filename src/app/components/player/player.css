@@ -126,15 +126,8 @@
 .controls {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.main-controls-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-grow: 1;
   justify-content: center;
+  gap: 16px;
 }
 
 .control-button {
