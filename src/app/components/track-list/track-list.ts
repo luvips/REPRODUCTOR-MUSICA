@@ -32,9 +32,6 @@ export class TrackListComponent {
   }
 
   getAccentColor(): string {
-    if (!this.currentTrack) return '#1db954';
-    const colors = ['#1db954', '#1ed760', '#ff6b6b', '#4ecdc4', '#a78bfa', '#fb923c'];
-    const index = this.currentTrack.id.length % colors.length;
-    return colors[index];
+    return '#ff6b00'; // Tono naranja para el tema urbano
   }
 }

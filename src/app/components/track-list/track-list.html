@@ -50,36 +50,7 @@
       </div>
       <span *ngIf="currentTrack && currentTrack.id === track.id" class="playing-indicator">
         <svg viewBox="0 0 24 24" fill="currentColor">
-          <rect x="4" y="4" width="3.5" height="16" rx="1.5">
-            <animate attributeName="height" 
-                     values="4;16;4" 
-                     dur="1s" 
-                     repeatCount="indefinite" />
-            <animate attributeName="y" 
-                     values="10;4;10" 
-                     dur="1s" 
-                     repeatCount="indefinite" />
-          </rect>
-          <rect x="10.25" y="4" width="3.5" height="16" rx="1.5">
-            <animate attributeName="height" 
-                     values="16;4;16" 
-                     dur="1s" 
-                     repeatCount="indefinite" />
-            <animate attributeName="y" 
-                     values="4;10;4" 
-                     dur="1s" 
-                     repeatCount="indefinite" />
-          </rect>
-          <rect x="16.5" y="4" width="3.5" height="16" rx="1.5">
-            <animate attributeName="height" 
-                     values="4;16;4" 
-                     dur="1s" 
-                     repeatCount="indefinite" />
-            <animate attributeName="y" 
-                     values="10;4;10" 
-                     dur="1s" 
-                     repeatCount="indefinite" />
-          </rect>
+          <path d="M4 18h3V6H4v12zm5 0h3V6H9v12zm5 0h3V6h-3v12z"/>
         </svg>
       </span>
     </div>
