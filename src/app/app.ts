@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { SearchBarComponent } from './components/search-bar/search-bar';
 import { TrackListComponent } from './components/track-list/track-list';
 import { PlayerComponent } from './components/player/player';
@@ -21,7 +23,9 @@ import { SpotifyService } from './services/spotify';
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+  
   // Resultados de búsqueda
   searchResults: any[] = [];
   
@@ -106,16 +110,57 @@ export class AppComponent {
   isLoading: boolean = false;
   error: string | null = null;
 
-  constructor(private spotifyService: SpotifyService) {
-   
+  constructor(
+    private spotifyService: SpotifyService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.selectedTrack = this.staticPlaylist[0];
+  }
+
+  ngOnInit(): void {
+    // Escuchar cambios en los query parameters de la URL
+    this.route.queryParams
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+        const query = params['q'];
+        
+        if (query && query.trim()) {
+          // Si hay un query parameter 'q', realizar búsqueda
+          this.performSearch(query);
+        } else {
+          // Si no hay query, volver a la vista principal
+          this.isSearching = false;
+          this.searchResults = [];
+          this.error = null;
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onSearch(query: string): void {
     if (!query.trim()) {
+      // Si el query está vacío, limpiar el query parameter
+      this.router.navigate([], {
+        queryParams: {},
+        replaceUrl: true
+      });
       return;
     }
 
+    // Actualizar la URL con el query parameter 'q'
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { q: query },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  private performSearch(query: string): void {
     this.isLoading = true;
     this.error = null;
     this.isSearching = true;
@@ -138,8 +183,10 @@ export class AppComponent {
   }
 
   goToHome(): void {
-    this.isSearching = false;
-    this.searchResults = [];
-    this.error = null;
+    // Limpiar query parameters para volver al home
+    this.router.navigate([], {
+      queryParams: {},
+      replaceUrl: true
+    });
   }
 }

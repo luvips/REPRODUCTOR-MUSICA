@@ -7,12 +7,13 @@
     <input 
       type="text" 
       [(ngModel)]="searchQuery"
+      (ngModelChange)="onInputChange()"
       (keypress)="onKeyPress($event)"
       placeholder="¿Qué quieres escuchar hoy?"
       class="search-input"
     />
     <button (click)="onSearch()" class="search-button">
-      
+      Buscar
     </button>
   </div>
 </div>
