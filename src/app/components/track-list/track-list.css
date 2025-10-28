@@ -1,49 +1,137 @@
 .track-list-container {
-  background-color: #18181b;
-  border-radius: 12px;
+  background-color: #0a0a0a;
   padding: 20px;
   height: 100%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Mini Player - Más compacto */
+.mini-player {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mini-album-art {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.mini-track-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mini-track-name {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 3px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-track-artist {
+  color: #9ca3af;
+  font-size: 11px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-play-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.mini-play-button:hover {
+  transform: scale(1.05);
+}
+
+.mini-play-button svg {
+  width: 14px;
+  height: 14px;
+  color: black;
+}
+
+/* Título de la lista */
 .track-list-title {
   color: white;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
-  margin: 0 0 20px 0;
+  margin: 0 0 14px 0;
 }
 
 .empty-state {
   color: #9ca3af;
   text-align: center;
   padding: 40px 20px;
-  font-size: 15px;
+  font-size: 14px;
 }
 
+/* Lista de canciones */
 .tracks {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .track-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 10px 12px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  position: relative;
 }
 
 .track-item:hover {
   background-color: #27272a;
 }
 
+.track-item.active {
+  background-color: #27272a;
+}
+
 .track-image {
-  width: 56px;
-  height: 56px;
-  border-radius: 6px;
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
   object-fit: cover;
   flex-shrink: 0;
 }
@@ -56,12 +144,16 @@
 .track-name {
   color: white;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   margin: 0 0 4px 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   transition: color 0.2s ease;
+}
+
+.track-item.active .track-name {
+  color: #1db954;
 }
 
 .track-item:hover .track-name {
@@ -70,13 +162,27 @@
 
 .track-artist {
   color: #9ca3af;
-  font-size: 14px;
+  font-size: 13px;
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+/* Indicador de reproducción */
+.playing-indicator {
+  width: 16px;
+  height: 16px;
+  color: #1db954;
+  flex-shrink: 0;
+}
+
+.playing-indicator svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Scrollbar */
 .track-list-container::-webkit-scrollbar {
   width: 8px;
 }
@@ -92,4 +198,18 @@
 
 .track-list-container::-webkit-scrollbar-thumb:hover {
   background: #52525b;
+}
+
+@media (max-width: 768px) {
+  .track-list-container {
+    padding: 16px;
+  }
+
+  .mini-player {
+    padding: 10px;
+  }
+
+  .track-list-title {
+    font-size: 16px;
+  }
 }
