@@ -13,9 +13,7 @@ export class SearchBarComponent {
   searchQuery: string = '';
 
   onSearch(): void {
-    if (this.searchQuery.trim()) {
-      this.search.emit(this.searchQuery);
-    }
+    this.search.emit(this.searchQuery);
   }
 
   onKeyPress(event: KeyboardEvent): void {
