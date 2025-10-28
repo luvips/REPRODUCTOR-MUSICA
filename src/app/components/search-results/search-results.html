@@ -31,10 +31,82 @@
   </div>
 
   <div class="results-content">
-    <!-- Vista Todo / Canciones -->
-    <div *ngIf="activeFilter === 'all' || activeFilter === 'songs'" class="songs-section">
-      <h2 class="section-title" *ngIf="activeFilter === 'all'">Canciones</h2>
-      
+    <!-- Vista TODO: Muestra 5 canciones, artistas y álbumes -->
+    <div *ngIf="activeFilter === 'all'" class="all-section">
+      <!-- Canciones (Top 5) -->
+      <div *ngIf="songs.length > 0" class="section-block">
+        <h2 class="section-title">Canciones</h2>
+        <div class="songs-list">
+          <div 
+            *ngFor="let track of songs.slice(0, 5); let i = index" 
+            (click)="selectTrack(track)"
+            class="song-item"
+          >
+            <span class="song-number">{{ i + 1 }}</span>
+            <img [src]="track.albumArt" [alt]="track.album" class="song-image" />
+            <div class="song-info">
+              <p class="song-name">{{ track.name }}</p>
+              <p class="song-artist">{{ track.artist }}</p>
+            </div>
+            <span class="song-album">{{ track.album }}</span>
+            <span class="song-duration">{{ formatDuration(track.duration) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Artistas -->
+      <div *ngIf="uniqueArtists.length > 0" class="section-block">
+        <h2 class="section-title">Artistas</h2>
+        <div class="artists-grid">
+          <div 
+            *ngFor="let artist of uniqueArtists.slice(0, 6)"
+            (click)="playArtistTrack(artist)"
+            class="artist-card"
+          >
+            <div class="artist-image-container">
+              <img [src]="artist.image" [alt]="artist.name" class="artist-image" />
+              <div class="play-overlay">
+                <svg class="play-icon" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            <p class="artist-name">{{ artist.name }}</p>
+            <p class="artist-type">Artista</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Álbumes -->
+      <div *ngIf="uniqueAlbums.length > 0" class="section-block">
+        <h2 class="section-title">Álbumes</h2>
+        <div class="albums-grid">
+          <div 
+            *ngFor="let album of uniqueAlbums.slice(0, 6)"
+            (click)="playAlbumTrack(album)"
+            class="album-card"
+          >
+            <div class="album-image-container">
+              <img [src]="album.image" [alt]="album.name" class="album-image" />
+              <div class="play-overlay">
+                <svg class="play-icon" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            <p class="album-name">{{ album.name }}</p>
+            <p class="album-artist">{{ album.artist }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="songs.length === 0 && uniqueArtists.length === 0 && uniqueAlbums.length === 0" class="empty-state">
+        No se encontraron resultados
+      </div>
+    </div>
+
+    <!-- Vista Canciones -->
+    <div *ngIf="activeFilter === 'songs'" class="songs-section">      
       <div *ngIf="songs.length === 0" class="empty-state">
         No se encontraron canciones
       </div>
