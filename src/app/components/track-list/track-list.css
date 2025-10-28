@@ -1,34 +1,30 @@
 .track-list-container {
-  background-color: #0a0a0a;
+  background: linear-gradient(180deg, #1e1e1e, #121212);
   padding: 20px;
   height: 100%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Mini Player - Más compacto */
+/* Mini Player */
 .mini-player {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   padding: 12px;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   animation: slideDown 0.3s ease;
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .mini-album-art {
@@ -46,26 +42,23 @@
 
 .mini-track-name {
   color: white;
-  font-size: 13px;
-  font-weight: 600;
-  margin: 0 0 3px 0;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .mini-track-artist {
-  color: #9ca3af;
-  font-size: 11px;
+  color: #a0a0a0;
+  font-size: 12px;
   margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .mini-play-button {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -74,64 +67,66 @@
   justify-content: center;
   transition: transform 0.2s ease;
   flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(145deg, #ff8c00, #ff4500);
 }
 
-.mini-play-button:hover {
-  transform: scale(1.05);
-}
+.mini-play-button:hover { transform: scale(1.05); }
 
 .mini-play-button svg {
-  width: 14px;
-  height: 14px;
-  color: black;
+  width: 16px;
+  height: 16px;
+  color: white;
 }
 
 /* Título de la lista */
 .track-list-title {
   color: white;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  margin: 0 0 14px 0;
+  margin: 0 0 16px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .empty-state {
-  color: #9ca3af;
+  color: #a0a0a0;
   text-align: center;
   padding: 40px 20px;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 /* Lista de canciones */
 .tracks {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .track-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: 6px;
+  gap: 14px;
+  padding: 10px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease;
   position: relative;
+  border: 1px solid transparent;
 }
 
 .track-item:hover {
-  background-color: #27272a;
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .track-item.active {
-  background-color: #27272a;
+  background-color: rgba(255, 107, 0, 0.1);
+  border-color: rgba(255, 107, 0, 0.3);
 }
 
 .track-image {
   width: 48px;
   height: 48px;
-  border-radius: 4px;
+  border-radius: 6px;
   object-fit: cover;
   flex-shrink: 0;
 }
@@ -143,73 +138,30 @@
 
 .track-name {
   color: white;
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 15px;
   margin: 0 0 4px 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: color 0.2s ease;
-}
-
-.track-item.active .track-name {
-  color: #1db954;
-}
-
-.track-item:hover .track-name {
-  color: #1db954;
 }
 
 .track-artist {
-  color: #9ca3af;
+  color: #a0a0a0;
   font-size: 13px;
   margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 /* Indicador de reproducción */
 .playing-indicator {
-  width: 16px;
-  height: 16px;
-  color: #1db954;
+  width: 20px;
+  height: 20px;
+  color: #ff6b00; /* Naranja */
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .playing-indicator svg {
   width: 100%;
   height: 100%;
-}
-
-/* Scrollbar */
-.track-list-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.track-list-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.track-list-container::-webkit-scrollbar-thumb {
-  background: #3f3f46;
-  border-radius: 4px;
-}
-
-.track-list-container::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
-}
-
-@media (max-width: 768px) {
-  .track-list-container {
-    padding: 16px;
-  }
-
-  .mini-player {
-    padding: 10px;
-  }
-
-  .track-list-title {
-    font-size: 16px;
-  }
 }

@@ -4,32 +4,26 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  padding: 20px;
+  padding: 16px;
+  font-family: 'Urbanist', sans-serif;
 }
 
-.empty-player {
-  text-align: center;
-  color: #9ca3af;
-}
-
-.empty-icon {
-  width: 128px;
-  height: 128px;
-  margin: 0 auto 20px;
-  opacity: 0.5;
-}
-
-.empty-text {
-  font-size: 20px;
-  margin: 0;
-}
+.empty-player { text-align: center; color: #9ca3af; }
+.empty-icon { width: 100px; height: 100px; margin: 0 auto 16px; opacity: 0.3; }
+.empty-text { font-size: 18px; margin: 0; }
 
 .player-content {
   width: 100%;
-  max-width: 384px;
+  max-width: 360px; /* Reducido para hacerlo más compacto */
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px; /* Reducido */
+  background: linear-gradient(145deg, #1e1e1e, #121212);
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .album-art-container {
@@ -39,12 +33,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.album-art {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  display: block;
-}
+.album-art { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
 
 .track-header {
   display: flex;
@@ -53,14 +42,11 @@
   gap: 12px;
 }
 
-.track-details {
-  flex: 1;
-  min-width: 0;
-}
+.track-details { flex: 1; min-width: 0; }
 
 .song-title {
   color: white;
-  font-size: 24px;
+  font-size: 22px; /* Reducido */
   font-weight: 700;
   margin: 0 0 6px 0;
   overflow: hidden;
@@ -69,8 +55,9 @@
 }
 
 .artist-name {
-  color: #9ca3af;
-  font-size: 16px;
+  color: #a0a0a0;
+  font-size: 16px; /* Reducido */
+  font-weight: 400;
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -78,34 +65,19 @@
 }
 
 .like-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  transition: transform 0.2s ease;
-  flex-shrink: 0;
+  background: none; border: none; cursor: pointer; padding: 4px;
+  transition: transform 0.2s ease; flex-shrink: 0;
 }
 
-.like-button:hover {
-  transform: scale(1.1);
-}
+.like-button:hover { transform: scale(1.15); }
+.heart-icon { width: 24px; height: 24px; transition: color 0.3s ease; }
 
-.heart-icon {
-  width: 24px;
-  height: 24px;
-  transition: color 0.2s ease;
-}
-
-.progress-section {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+.progress-section { display: flex; flex-direction: column; gap: 8px; }
 
 .progress-bar-container {
   width: 100%;
-  background-color: #3f3f46;
-  height: 5px;
+  background-color: #333;
+  height: 5px; /* Más delgado */
   border-radius: 2.5px;
   overflow: hidden;
 }
@@ -114,83 +86,61 @@
   height: 100%;
   transition: width 0.3s ease;
   border-radius: 2.5px;
+  background: linear-gradient(90deg, #ff8c00, #ff6b00);
 }
 
 .progress-time {
   display: flex;
   justify-content: space-between;
-  color: #9ca3af;
-  font-size: 11px;
+  color: #888;
+  font-size: 11px; /* Reducido */
+  font-weight: 700;
 }
 
 .controls {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 16px; /* Reducido */
 }
 
 .control-button {
-  background: none;
-  border: none;
-  color: #9ca3af;
-  cursor: pointer;
-  padding: 6px;
-  transition: color 0.2s ease, transform 0.2s ease;
+  background: none; border: none; color: #888; cursor: pointer;
+  padding: 6px; transition: all 0.2s ease;
 }
 
-.control-button:hover {
-  color: white;
-}
+.control-button:hover { color: white; transform: scale(1.1); }
 
-.control-icon {
-  width: 20px;
-  height: 20px;
-}
-
-.control-icon-large {
-  width: 28px;
-  height: 28px;
-}
+.control-icon-large { width: 28px; height: 28px; } /* Reducido */
 
 .play-button {
-  width: 48px;
-  height: 48px;
+  width: 56px; /* Reducido */
+  height: 56px; /* Reducido */
   border-radius: 50%;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(145deg, #ff8c00, #ff4500);
+  box-shadow: 0 6px 20px rgba(255, 107, 10, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .play-button:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 10px 25px rgba(255, 107, 10, 0.5);
 }
 
 .play-icon {
-  width: 20px;
-  height: 20px;
-  color: black;
+  width: 24px; /* Reducido */
+  height: 24px; /* Reducido */
+  color: white;
 }
 
-.play-button svg:first-child {
-  margin-left: 2px;
-}
+.play-button svg:first-child { margin-left: 3px; }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.player-content {
-  animation: fadeIn 0.4s ease;
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
