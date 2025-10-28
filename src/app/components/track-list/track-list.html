@@ -1,15 +1,43 @@
 <div class="track-list-container">
-  <h2 class="track-list-title">Cola</h2>
-  
-  <div *ngIf="tracks.length === 0" class="empty-state">
-    Busca canciones y mira los resultados aqui
+  <!-- Mini Player (solo visible cuando isSearching = true) -->
+  <div *ngIf="isSearching && currentTrack" class="mini-player">
+    <img 
+      [src]="currentTrack.albumArt" 
+      [alt]="currentTrack.album"
+      class="mini-album-art"
+    />
+    <div class="mini-track-info">
+      <p class="mini-track-name">{{ currentTrack.name }}</p>
+      <p class="mini-track-artist">{{ currentTrack.artist }}</p>
+    </div>
+    <button 
+      (click)="togglePlay()"
+      class="mini-play-button"
+      [style.background-color]="getAccentColor()"
+    >
+      <svg *ngIf="!isPlaying" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      <svg *ngIf="isPlaying" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+      </svg>
+    </button>
   </div>
 
+  <!-- Título de la lista -->
+  <h2 class="track-list-title">{{ isSearching ? 'Tu Playlist' : 'Cola de Reproducción' }}</h2>
+  
+  <div *ngIf="tracks.length === 0" class="empty-state">
+    No hay canciones en la playlist
+  </div>
+
+  <!-- Lista de canciones -->
   <div class="tracks">
     <div 
       *ngFor="let track of tracks" 
       (click)="selectTrack(track)"
       class="track-item"
+      [class.active]="currentTrack && currentTrack.id === track.id"
     >
       <img 
         [src]="track.albumArt" 
@@ -20,6 +48,40 @@
         <p class="track-name">{{ track.name }}</p>
         <p class="track-artist">{{ track.artist }}</p>
       </div>
+      <span *ngIf="currentTrack && currentTrack.id === track.id" class="playing-indicator">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <rect x="4" y="4" width="3.5" height="16" rx="1.5">
+            <animate attributeName="height" 
+                     values="4;16;4" 
+                     dur="1s" 
+                     repeatCount="indefinite" />
+            <animate attributeName="y" 
+                     values="10;4;10" 
+                     dur="1s" 
+                     repeatCount="indefinite" />
+          </rect>
+          <rect x="10.25" y="4" width="3.5" height="16" rx="1.5">
+            <animate attributeName="height" 
+                     values="16;4;16" 
+                     dur="1s" 
+                     repeatCount="indefinite" />
+            <animate attributeName="y" 
+                     values="4;10;4" 
+                     dur="1s" 
+                     repeatCount="indefinite" />
+          </rect>
+          <rect x="16.5" y="4" width="3.5" height="16" rx="1.5">
+            <animate attributeName="height" 
+                     values="4;16;4" 
+                     dur="1s" 
+                     repeatCount="indefinite" />
+            <animate attributeName="y" 
+                     values="10;4;10" 
+                     dur="1s" 
+                     repeatCount="indefinite" />
+          </rect>
+        </svg>
+      </span>
     </div>
   </div>
 </div>
