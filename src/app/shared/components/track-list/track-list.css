@@ -1,0 +1,148 @@
+/* Estilos existentes con ajustes menores */
+.track-list-container {
+  /* background: linear-gradient(180deg, #1e1e1e, #121212); */ /* Simplificado */
+  background-color: #121212;
+  padding: 15px; /* Un poco menos padding */
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  /* border-radius: 12px; */ /* Quitar bordes redondeados si está en un contenedor */
+  /* border: 1px solid rgba(255, 255, 255, 0.05); */
+}
+
+/* Mini Player eliminado */
+
+/* Título de la lista */
+.track-list-title {
+  color: white;
+  font-size: 18px; /* Ligeramente más pequeño */
+  font-weight: 700;
+  margin: 0 0 12px 0; /* Menos margen inferior */
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0; /* Evitar que se encoja */
+}
+
+.empty-state {
+  color: #a0a0a0;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 15px;
+  flex-grow: 1; /* Ocupa espacio si está vacío */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Lista de canciones */
+.tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Menos espacio entre items */
+  overflow-y: auto; /* Scroll interno si es necesario */
+  flex-grow: 1; /* Ocupa espacio disponible */
+}
+
+.track-item {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Un poco menos gap */
+  padding: 8px; /* Menos padding */
+  border-radius: 6px; /* Bordes más suaves */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+  /* border: 1px solid transparent; */ /* Quitado borde */
+}
+
+.track-item:hover {
+  background-color: rgba(255, 255, 255, 0.08); /* Hover más notable */
+}
+
+.track-item.active {
+  background-color: rgba(255, 107, 0, 0.15); /* Activo un poco más visible */
+  /* border-color: rgba(255, 107, 0, 0.3); */
+}
+
+.track-image {
+  width: 40px; /* Imagen un poco más pequeña */
+  height: 40px;
+  border-radius: 4px; /* Bordes más suaves */
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.track-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.track-name {
+  color: white;
+  font-weight: 500; /* Menos bold */
+  font-size: 14px; /* Un poco más pequeño */
+  margin: 0 0 3px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.track-item.active .track-name {
+  color: #ff6b00; /* Resaltar nombre de pista activa */
+  font-weight: 700;
+}
+
+
+.track-artist {
+  color: #a0a0a0;
+  font-size: 12px; /* Un poco más pequeño */
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Indicador de reproducción */
+.playing-indicator {
+  width: 18px; /* Más pequeño */
+  height: 18px;
+  color: #ff6b00; /* Naranja */
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.playing-indicator svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos de scrollbar para la lista interna si es necesario */
+.tracks::-webkit-scrollbar {
+  width: 6px;
+}
+.tracks::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tracks::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 3px;
+}
+.tracks::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
+}
+
+/* Scrollbar para el contenedor principal (si es necesario) */
+.track-list-container::-webkit-scrollbar {
+  width: 8px;
+}
+.track-list-container::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+}
+.track-list-container::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 4px;
+}
+.track-list-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}

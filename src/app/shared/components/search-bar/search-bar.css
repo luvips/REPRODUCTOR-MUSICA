@@ -26,7 +26,7 @@
   flex-grow: 1;
   background-color: #27272a;
   color: white;
-  padding: 12px 120px 12px 48px; /* Aumentar padding derecho para el botón */
+  padding: 12px 120px 12px 48px;
   border-radius: 50px;
   border: none;
   outline: none;

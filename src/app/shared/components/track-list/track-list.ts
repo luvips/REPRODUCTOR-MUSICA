@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Track } from '../../../models/track.model';
 
 @Component({
   selector: 'app-track-list',
@@ -9,19 +10,12 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./track-list.css']
 })
 export class TrackListComponent {
-  @Input() tracks: any[] = [];
-  @Input() currentTrack: any | null = null;
-  @Input() isSearching: boolean = false;
-  @Output() trackSelected = new EventEmitter<any>();
+  @Input() tracks: Track[] = [];
+  @Input() currentTrack: Track | null = null;
+  @Output() trackSelected = new EventEmitter<Track>();
 
-  isPlaying: boolean = false;
-
-  selectTrack(track: any): void {
+  selectTrack(track: Track): void {
     this.trackSelected.emit(track);
-  }
-
-  togglePlay(): void {
-    this.isPlaying = !this.isPlaying;
   }
 
   formatTime(ms: number): string {
@@ -29,9 +23,5 @@ export class TrackListComponent {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  }
-
-  getAccentColor(): string {
-    return '#ff6b00'; // Tono naranja para el tema urbano
   }
 }

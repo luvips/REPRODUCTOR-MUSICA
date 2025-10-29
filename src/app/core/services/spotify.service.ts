@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map, catchError, throwError, switchMap, BehaviorSubject, filter, take } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../../environments/environment.development';
+import { Track } from '../../models/track.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,9 @@ export class SpotifyService {
     if (environment.TOKEN) {
       this.tokenSubject.next(environment.TOKEN);
     } else {
-      // Si no, se genera uno automáticamente
       this.refreshToken();
     }
   }
-
 
   private refreshToken(): void {
     const headers = new HttpHeaders({
@@ -38,8 +37,6 @@ export class SpotifyService {
         next: (response) => {
           console.log('Token obtenido exitosamente');
           this.tokenSubject.next(response.access_token);
-          
-          // Renovar token automáticamente antes de que expire (50 minutos)
           setTimeout(() => this.refreshToken(), 50 * 60 * 1000);
         },
         error: (error) => {
@@ -48,10 +45,7 @@ export class SpotifyService {
       });
   }
 
-  /**
-   * Búsqueda de canciones
-   */
-  searchTracks(query: string): Observable<any[]> {
+  searchTracks(query: string): Observable<Track[]> {
     return this.token$.pipe(
       filter(token => !!token),
       take(1),
@@ -70,7 +64,7 @@ export class SpotifyService {
           return [];
         }
         
-        return response.tracks.items.map((item: any) => ({
+        return response.tracks.items.map((item: any): Track => ({
           id: item.id,
           name: item.name,
           artist: item.artists[0]?.name || 'Unknown Artist',
@@ -84,7 +78,6 @@ export class SpotifyService {
         console.error('Spotify API Error:', error);
         
         if (error.status === 401) {
-          // Si el token expiró, renovarlo
           this.refreshToken();
           return throwError(() => new Error('Token expirado, renovando...'));
         }

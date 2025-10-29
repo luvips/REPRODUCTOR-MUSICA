@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Track } from '../../../models/track.model';
 
 @Component({
   selector: 'app-player',
@@ -9,7 +10,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./player.css']
 })
 export class PlayerComponent {
-  @Input() track: any | null = null;
+  @Input() track: Track | null = null;
+  @Input() displayMode: 'full' | 'image-only' | 'compact' = 'full';
+  
   isLiked: boolean = false;
   currentTime: number = 0;
   isPlaying: boolean = false;
@@ -30,6 +33,6 @@ export class PlayerComponent {
   }
 
   getAccentColor(): string {
-    return '#ff6b00'; // Tono naranja para el tema urbano
+    return '#ff6b00';
   }
 }

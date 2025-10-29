@@ -18,7 +18,6 @@ export class SearchBarComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor() {
-     
     this.searchSubject.pipe(
       debounceTime(300), 
       distinctUntilChanged(), 
@@ -34,19 +33,16 @@ export class SearchBarComponent implements OnDestroy {
   }
 
   onSearch(): void {
-    // Búsqueda inmediata al hacer clic en el botón
     this.search.emit(this.searchQuery);
   }
 
   onKeyPress(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
-      // Búsqueda inmediata al presionar Enter
       this.search.emit(this.searchQuery);
     }
   }
 
   onInputChange(): void {
-   
     this.searchSubject.next(this.searchQuery);
   }
 }

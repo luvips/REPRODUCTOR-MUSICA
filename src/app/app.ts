@@ -1,36 +1,30 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { SearchBarComponent } from './components/search-bar/search-bar';
-import { TrackListComponent } from './components/track-list/track-list';
-import { PlayerComponent } from './components/player/player';
-import { SearchResultsComponent } from './components/search-results/search-results';
-import { SpotifyService } from './services/spotify';
+
+import { SearchBarComponent } from './shared/components/search-bar/search-bar';
+import { PlayerComponent } from './shared/components/player/player';
+import { TrackListComponent } from './shared/components/track-list/track-list';
+import { PlayerStateService } from './core/services/player-state.service';
+import { Track } from './models/track.model';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
-    HttpClientModule,
+    RouterOutlet,
+    RouterModule,
+
     SearchBarComponent,
-    TrackListComponent,
     PlayerComponent,
-    SearchResultsComponent
+    TrackListComponent
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
-  
-  // Resultados de búsqueda
-  searchResults: any[] = [];
-  
-  // Playlist estática de LESSERAFIM
-  staticPlaylist: any[] = [
+export class AppComponent implements OnInit {
+  playlist: Track[] = [
     {
       id: '1',
       name: 'SPAGHETTI',
@@ -38,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
       album: 'SPA',
       albumArt: 'https://i.scdn.co/image/ab67616d00001e026c4a726c271daf4a4b97e35b',
       duration: 193000,
-      previewUrl: null
+      previewUrl: 'https://p.scdn.co/mp3-preview/3b1f0b3b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b'
     },
     {
       id: '2',
@@ -104,89 +98,29 @@ export class AppComponent implements OnInit, OnDestroy {
       previewUrl: null
     }
   ];
-  
-  selectedTrack: any | null = null;
-  isSearching: boolean = false;
-  isLoading: boolean = false;
-  error: string | null = null;
 
-  constructor(
-    private spotifyService: SpotifyService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
-    this.selectedTrack = this.staticPlaylist[0];
-  }
+  selectedTrack: Track | null = null;
+
+  constructor(private router: Router, private playerStateService: PlayerStateService) {}
 
   ngOnInit(): void {
-    // Escuchar cambios en los query parameters de la URL
-    this.route.queryParams
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(params => {
-        const query = params['q'];
-        
-        if (query && query.trim()) {
-          // Si hay un query parameter 'q', realizar búsqueda
-          this.performSearch(query);
-        } else {
-          // Si no hay query, volver a la vista principal
-          this.isSearching = false;
-          this.searchResults = [];
-          this.error = null;
-        }
-      });
-  }
+    // Precargar la primera canción (SPAGHETTI)
+    this.playerStateService.setSelectedTrack(this.playlist[0]);
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.playerStateService.selectedTrack$.subscribe(track => {
+      this.selectedTrack = track;
+    });
   }
 
   onSearch(query: string): void {
-    if (!query.trim()) {
-      // Si el query está vacío, limpiar el query parameter
-      this.router.navigate([], {
-        queryParams: {},
-        replaceUrl: true
-      });
-      return;
+    if (!query || !query.trim()) {
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/search', query]);
     }
-
-    // Actualizar la URL con el query parameter 'q'
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { q: query },
-      queryParamsHandling: 'merge'
-    });
   }
 
-  private performSearch(query: string): void {
-    this.isLoading = true;
-    this.error = null;
-    this.isSearching = true;
-
-    this.spotifyService.searchTracks(query).subscribe({
-      next: (tracks) => {
-        this.searchResults = tracks;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Error searching tracks:', err);
-        this.error = err.message || 'Error al buscar canciones. Verifica tu token de Spotify.';
-        this.isLoading = false;
-      }
-    });
-  }
-
-  onTrackSelected(track: any): void {
-    this.selectedTrack = track;
-  }
-
-  goToHome(): void {
-    // Limpiar query parameters para volver al home
-    this.router.navigate([], {
-      queryParams: {},
-      replaceUrl: true
-    });
+  onTrackSelected(track: Track): void {
+    this.playerStateService.setSelectedTrack(track);
   }
 }

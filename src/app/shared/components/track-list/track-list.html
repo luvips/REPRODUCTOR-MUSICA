@@ -1,0 +1,36 @@
+<div class="track-list-container">
+  <h2 class="track-list-title">Cola de Reproducción</h2>
+
+  @if (tracks.length === 0) {
+    <div class="empty-state">
+      No hay canciones en la playlist
+    </div>
+  }
+
+  <div class="tracks">
+    @for (track of tracks; track track.id) {
+      <div
+        (click)="selectTrack(track)"
+        class="track-item"
+        [class.active]="currentTrack && currentTrack.id === track.id"
+      >
+        <img
+          [src]="track.albumArt"
+          [alt]="track.album"
+          class="track-image"
+        />
+        <div class="track-info">
+          <p class="track-name">{{ track.name }}</p>
+          <p class="track-artist">{{ track.artist }}</p>
+        </div>
+        @if (currentTrack && currentTrack.id === track.id) {
+          <span class="playing-indicator">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 18h3V6H4v12zm5 0h3V6H9v12zm5 0h3V6h-3v12z"/>
+            </svg>
+          </span>
+        }
+      </div>
+    }
+  </div>
+</div>

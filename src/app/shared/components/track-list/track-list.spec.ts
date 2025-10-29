@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TrackListComponent } from './track-list'; // Ruta actualizada
 
-import {  SearchBarComponent } from './search-bar';
-
-describe('SearchBar', () => {
-  let component: SearchBarComponent;
-  let fixture: ComponentFixture<SearchBarComponent>;
+describe('TrackListComponent', () => {
+  let component: TrackListComponent;
+  let fixture: ComponentFixture<TrackListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchBarComponent]
+      imports: [TrackListComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SearchBarComponent);
+    fixture = TestBed.createComponent(TrackListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,62 +1,31 @@
 <div class="app-container">
   <header class="app-header">
     <div class="header-content">
-      <button 
-        *ngIf="isSearching" 
-        (click)="goToHome()"
-        class="home-button"
-      >
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      <button routerLink="/" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+          <path d="M0 0h24v24H0V0z" fill="none"/>
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/>
         </svg>
-        <span>Inicio</span>
       </button>
-
       <app-search-bar (search)="onSearch($event)"></app-search-bar>
-    </div>
-    
-    <div *ngIf="isLoading" class="loading-message">
-      Buscando...
-    </div>
-    
-    <div *ngIf="error" class="error-message">
-      {{ error }}
     </div>
   </header>
 
-  <!-- Vista Principal: Player + Tracklist -->
-  <main *ngIf="!isSearching" class="app-main">
-    <div class="player-section">
-      <app-player [track]="selectedTrack"></app-player>
-    </div>
+  <div class="app-body">
+    <main class="app-main">
+      <router-outlet></router-outlet>
+    </main>
 
-    <aside class="tracklist-section">
-      <app-track-list 
-        [tracks]="staticPlaylist" 
+    <aside class="app-sidebar">
+      <app-track-list
+        [tracks]="playlist"
         [currentTrack]="selectedTrack"
-        [isSearching]="false"
         (trackSelected)="onTrackSelected($event)"
       ></app-track-list>
     </aside>
-  </main>
+  </div>
 
-  <!-- Vista de Búsqueda: SearchResults + Mini Player con Playlist -->
-  <main *ngIf="isSearching" class="app-main">
-    <div class="search-section">
-      <app-search-results
-        [tracks]="searchResults"
-        (trackSelected)="onTrackSelected($event)"
-      ></app-search-results>
-    </div>
-
-    <aside class="tracklist-section">
-      <app-track-list 
-        [tracks]="staticPlaylist" 
-        [currentTrack]="selectedTrack"
-        [isSearching]="true"
-        (trackSelected)="onTrackSelected($event)"
-      ></app-track-list>
-    </aside>
-  </main>
+  <footer class="app-footer">
+    <app-player [track]="selectedTrack" displayMode="compact"></app-player>
+  </footer>
 </div>

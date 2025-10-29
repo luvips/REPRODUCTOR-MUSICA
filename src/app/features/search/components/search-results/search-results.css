@@ -4,6 +4,22 @@
   overflow-y: auto;
 }
 
+.loading-message, .error-message {
+  text-align: center;
+  margin-top: 16px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.loading-message { 
+  color: #a0a0a0; 
+}
+
+.error-message {
+  background-color: #5c1f1f;
+  color: #ffcccc;
+}
+
 .filter-tabs {
   display: flex;
   gap: 12px;
@@ -55,7 +71,6 @@
   font-size: 15px;
 }
 
-/* Songs List */
 .songs-list {
   display: flex;
   flex-direction: column;
@@ -126,7 +141,6 @@
   text-align: right;
 }
 
-/* Artists Grid */
 .artists-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -204,7 +218,6 @@
   text-transform: capitalize;
 }
 
-/* Albums Grid */
 .albums-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -271,7 +284,6 @@
   }
 }
 
-/* Scrollbar */
 .search-results-container::-webkit-scrollbar {
   width: 10px;
 }

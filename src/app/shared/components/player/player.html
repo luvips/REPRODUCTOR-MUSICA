@@ -1,0 +1,100 @@
+<div class="player-container" [class.compact]="displayMode === 'compact'" [class.image-only]="displayMode === 'image-only'">
+  <div [hidden]="track !== null" class="empty-player">
+    <svg class="empty-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+    </svg>
+    <p class="empty-text">Selecciona tu canción para escuchar</p>
+  </div>
+
+  <div [hidden]="track === null" class="player-content" [class.compact]="displayMode === 'compact'" [class.image-only]="displayMode === 'image-only'">
+    <!-- Left section: Album art + Track info -->
+    <div class="left-section" [hidden]="displayMode === 'image-only'">
+      <div class="album-art-container" [hidden]="track === null">
+        <img
+          [src]="track?.albumArt"
+          [alt]="track?.album"
+          class="album-art"
+        />
+      </div>
+
+      <div class="track-info">
+        <h1 class="song-title">{{ track?.name }}</h1>
+        <p class="artist-name">{{ track?.artist }}</p>
+      </div>
+    </div>
+
+    <!-- Image only mode -->
+    <div class="album-art-container" [hidden]="displayMode !== 'image-only' || track === null">
+      <img
+        [src]="track?.albumArt"
+        [alt]="track?.album"
+        class="album-art"
+      />
+    </div>
+
+    <!-- Center section: Controls + Progress bar -->
+    <div class="center-section" [hidden]="displayMode === 'image-only'">
+      <div class="controls-buttons">
+        <button class="control-button">
+          <svg class="control-icon-large" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+          </svg>
+        </button>
+
+        <button
+          (click)="togglePlay()"
+          class="play-button"
+        >
+          @if (!isPlaying) {
+            <svg class="play-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          } @else {
+            <svg class="play-icon" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6 4h4v16H6zM14 4h4v16h-4z"/>
+            </svg>
+          }
+        </button>
+
+        <button class="control-button">
+          <svg class="control-icon-large" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M16 18h2V6h-2zm-3.5-6L4 6v12z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="progress-section" [hidden]="track === null">
+        <span class="current-time">{{ formatTime((track?.duration || 0) * 0.3) }}</span>
+        <div class="progress-bar-container">
+          <div
+            class="progress-bar"
+            [style.width.%]="30"
+            [style.background-color]="getAccentColor()"
+          ></div>
+        </div>
+        <span class="total-time">{{ formatTime(track?.duration || 0) }}</span>
+      </div>
+    </div>
+
+    <!-- Right section: Empty for now (like button could go here) -->
+    <div class="right-section" [hidden]="displayMode === 'image-only'">
+      <button
+        (click)="toggleLike()"
+        class="like-button"
+        [class.liked]="isLiked"
+        [hidden]="displayMode === 'compact'"
+      >
+        <svg
+          class="heart-icon"
+          [style.color]="isLiked ? getAccentColor() : '#6b7280'"
+          [attr.fill]="isLiked ? 'currentColor' : 'none'"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
